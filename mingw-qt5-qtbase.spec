@@ -233,7 +233,7 @@ Fedora Windows cross-compiler.
 
 %package -n mingw32-qt5-qmake
 Summary:       Qt5 for Windows build environment
-Requires:      mingw32-qt5-qttools-tools
+# Requires:      mingw32-qt5-qttools-tools
 
 %description -n mingw32-qt5-qmake
 This package contains the build environment for cross compiling
@@ -278,7 +278,7 @@ Fedora Windows cross-compiler.
 
 %package -n mingw64-qt5-qmake
 Summary:       Qt for Windows build environment
-Requires:      mingw64-qt5-qttools-tools
+# Requires:      mingw64-qt5-qttools-tools
 
 %description -n mingw64-qt5-qmake
 This package contains the build environment for cross compiling
@@ -856,6 +856,7 @@ ln -s %{mingw64_target}-qmake-qt5 $RPM_BUILD_ROOT%{_bindir}/mingw64-qmake-qt5
 
 %changelog
 * Tue Jan 31 2017 Jajauma's Packages <jajauma@yandex.ru> - 5.6.0-5
+- Bootstrap build
 - Fix building on el7 by forcing c++11 mode
 
 * Sat May 07 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 5.6.0-4
