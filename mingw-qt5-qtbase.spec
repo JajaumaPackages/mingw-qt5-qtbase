@@ -20,7 +20,7 @@
 
 Name:           mingw-qt5-qtbase
 Version:        5.6.0
-Release:        4%{?pre:.%{pre}}%{?snapshot_date:.git%{snapshot_date}.%{snapshot_rev}}%{?dist}
+Release:        5%{?pre:.%{pre}}%{?snapshot_date:.git%{snapshot_date}.%{snapshot_rev}}%{?dist}
 Summary:        Qt5 for Windows - QtBase component
 
 License:        GPLv3 with exceptions or LGPLv2 with exceptions
@@ -357,7 +357,8 @@ rm -rf src/3rdparty/{pcre,zlib}
 %build
 # Generic configure arguments
 qt_configure_args_generic="\
-    -xplatform win32-g++
+    -xplatform win32-g++ \
+    -c++std c++11 \
     -optimized-qmake \
     -verbose \
     -opensource \
@@ -854,6 +855,9 @@ ln -s %{mingw64_target}-qmake-qt5 $RPM_BUILD_ROOT%{_bindir}/mingw64-qmake-qt5
 
 
 %changelog
+* Tue Jan 31 2017 Jajauma's Packages <jajauma@yandex.ru> - 5.6.0-5
+- Fix building on el7 by forcing c++11 mode
+
 * Sat May 07 2016 Erik van Pienbroek <epienbro@fedoraproject.org> - 5.6.0-4
 - Rebuild against mingw-gcc 6.1
 
