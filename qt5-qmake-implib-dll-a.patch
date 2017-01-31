@@ -1,0 +1,24 @@
+--- a/mkspecs/features/create_cmake.prf.cmake     2013-10-22 10:49:28.000000000 +0200
++++ b/mkspecs/features/create_cmake.prf   2013-10-23 21:38:02.959762089 +0200
+@@ -207,8 +207,8 @@
+             CMAKE_PRL_FILE_LOCATION_DEBUG = lib$${CMAKE_QT_STEM}d.prl
+             CMAKE_PRL_FILE_LOCATION_RELEASE = lib$${CMAKE_QT_STEM}.prl
+         } else {
+-            CMAKE_IMPLIB_FILE_LOCATION_DEBUG = lib$${CMAKE_QT_STEM}d.a
+-            CMAKE_IMPLIB_FILE_LOCATION_RELEASE = lib$${CMAKE_QT_STEM}.a
++            CMAKE_IMPLIB_FILE_LOCATION_DEBUG = lib$${CMAKE_QT_STEM}d.dll.a
++            CMAKE_IMPLIB_FILE_LOCATION_RELEASE = lib$${CMAKE_QT_STEM}.dll.a
+         }
+     } else {
+         CMAKE_WINMAIN_FILE_LOCATION_DEBUG = qtmain$${QT_LIBINFIX}d.lib
+--- qtbase-opensource-src-5.6.0/qmake/generators/win32/winmakefile.cpp.pkgconfig	2016-03-03 12:35:22.000000000 +0100
++++ qtbase-opensource-src-5.6.0/qmake/generators/win32/winmakefile.cpp	2016-03-27 21:43:26.437034815 +0200
+@@ -235,7 +235,7 @@
+     } else if (project->isActiveConfig("shared")) {
+         project->values("LIB_TARGET").prepend(project->first("QMAKE_PREFIX_STATICLIB")
+                                               + project->first("TARGET") + project->first("TARGET_VERSION_EXT")
+-                                              + '.' + project->first("QMAKE_EXTENSION_STATICLIB"));
++                                              + ".dll." + project->first("QMAKE_EXTENSION_STATICLIB"));
+         project->values("TARGET_EXT").append(project->first("TARGET_VERSION_EXT") + "."
+                 + project->first("QMAKE_EXTENSION_SHLIB"));
+         project->values("TARGET").first() = project->first("QMAKE_PREFIX_SHLIB") + project->first("TARGET");

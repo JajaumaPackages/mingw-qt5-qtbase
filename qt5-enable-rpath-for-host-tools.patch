@@ -1,0 +1,36 @@
+--- qtbase-opensource-src-5.6.0/mkspecs/features/qt_app.prf.orig	2016-04-05 20:45:03.722373809 +0200
++++ qtbase-opensource-src-5.6.0/mkspecs/features/qt_app.prf	2016-04-05 20:45:18.535534543 +0200
+@@ -20,6 +20,7 @@
+ QMAKE_LFLAGS += $$QMAKE_LFLAGS_GCSECTIONS
+ 
+ host_build: QT -= gui   # no host tool will ever use gui
++host_build: QT_CONFIG += rpath
+ host_build:force_bootstrap {
+     !build_pass:contains(QT_CONFIG, release_tools): CONFIG += release
+     contains(QT, core(-private)?|xml) {
+--- qtbase-opensource-src-5.6.0/mkspecs/features/qt.prf.orig	2016-04-05 20:44:15.508850655 +0200
++++ qtbase-opensource-src-5.6.0/mkspecs/features/qt.prf	2016-04-05 20:39:26.598715752 +0200
+@@ -168,8 +168,8 @@
+ qt_module_deps = $$CLEAN_QT $$CLEAN_QT_PRIVATE
+ qt_module_deps = $$resolve_depends(qt_module_deps, "QT.")
+ 
+-!no_qt_rpath:!static:contains(QT_CONFIG, rpath):!contains(QT_CONFIG, static):\
+-        contains(qt_module_deps, core) {
++!static:contains(QT_CONFIG, rpath):!contains(QT_CONFIG, static):\
++        contains(qt_module_deps, bootstrap_private) {
+     relative_qt_rpath:!isEmpty(QMAKE_REL_RPATH_BASE):contains(INSTALLS, target):\
+             isEmpty(target.files):isEmpty(target.commands):isEmpty(target.extra) {
+         mac {
+@@ -188,7 +193,11 @@
+         # NOT the /dev property, as INSTALLS use host paths
+         QMAKE_RPATHDIR += $$relative_path($$[QT_INSTALL_LIBS], $$binpath)
+     } else {
+-        QMAKE_RPATHDIR += $$[QT_INSTALL_LIBS/dev]
++        host_build {
++            QMAKE_RPATHDIR += $$[QT_HOST_LIBS]
++        } else {
++            QMAKE_RPATHDIR += $$[QT_INSTALL_LIBS/dev]
++        }
+     }
+ }
+ 
