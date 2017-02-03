@@ -20,7 +20,7 @@
 
 Name:           mingw-qt5-qtbase
 Version:        5.6.0
-Release:        6%{?pre:.%{pre}}%{?snapshot_date:.git%{snapshot_date}.%{snapshot_rev}}%{?dist}
+Release:        7%{?pre:.%{pre}}%{?snapshot_date:.git%{snapshot_date}.%{snapshot_rev}}%{?dist}
 Summary:        Qt5 for Windows - QtBase component
 
 License:        GPLv3 with exceptions or LGPLv2 with exceptions
@@ -855,6 +855,9 @@ ln -s %{mingw64_target}-qmake-qt5 $RPM_BUILD_ROOT%{_bindir}/mingw64-qmake-qt5
 
 
 %changelog
+* Fri Feb 03 2017 Jajauma's Packages <jajauma@yandex.ru> - 5.6.0-7
+- Rebuild with GCC 5.4.0
+
 * Wed Feb 01 2017 Jajauma's Packages <jajauma@yandex.ru> - 5.6.0-6
 - De-bootstrap build
 
